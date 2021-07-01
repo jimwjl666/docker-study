@@ -39,6 +39,19 @@ router.get('/hmset',async(ctx)=>{
     ok: 1,
   };
 })
+router.get('/set',async(ctx)=>{
+  await client.set('json',JSON.stringify({name:'zs',sex:'男'}))
+  ctx.body = {
+    ok: 1,
+  };
+})
+router.get('/get',async(ctx)=>{
+  let ret = await client.get('json')
+  ctx.body = {
+    ok: 1,
+    data: JSON.parse(ret)
+  };
+})
 
 app.use(router.routes());
 
